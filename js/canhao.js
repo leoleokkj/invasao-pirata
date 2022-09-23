@@ -11,8 +11,10 @@ class Canhao{
     //funções do objeto
     //mostrar o canhão na tela
     display(){
+push()
+imageMode(CENTER)
     image(canhaoImg2,this.x, this.y,this.width,this.height)
-    image(canhaoImg,60,30,200,200)
-
+    image(canhaoImg,160,120,200,200)
+pop()
     }
 }

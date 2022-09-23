@@ -8,7 +8,7 @@ var engine, world;
 var torre, torreImg;
 var fundoImg, solo;
 var canhao, canhaoImg,canhaoImg2
-
+var bala
 
 //pré-carregamento das imagens
 function preload(){
@@ -39,7 +39,9 @@ function setup() {
   torre = Bodies.rectangle(160,350,160,310,options);
   World.add(world,torre);
 //canhao
-canhao = new Canhao(70,30,200,200,0)
+canhao = new Canhao(160,120,200,200,0)
+//bala do canhao
+bala = new BCanhao(canhao.x, canhao.y)
 
 }
 
@@ -60,6 +62,14 @@ function draw()
   rect(solo.position.x, solo.position.y,width,1);
   //mostrar canhao
 canhao.display()
+//mostrar bala do canhao
+bala.display() 
+
+}
+function keyReleased(){
+if (keyCode == UP_ARROW){
+bala.atirar()
 
 }
 
+}
