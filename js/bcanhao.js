@@ -7,7 +7,7 @@ class BCanhao{
         var options = {
             isStatic: true
         }
-      this.body = Matter.Bodies.circle(x,y,this.r,options)
+      this.body = Bodies.circle(x,y,this.r,options)
       World.add(world,this.body)
     this.preload = loadImage("imagens/cannonball.png")
 
@@ -18,14 +18,20 @@ class BCanhao{
     //mostrar o canhão na tela
     display(){
     push()
+    translate(this.x, this.y)
     imageMode(CENTER)
-    image(this.preload,this.body.position.x,this.body.position.y,this.r,this.r)
+    image(this.preload,0,0,this.r,this.r)
     pop()
     }
 atirar(){
-Matter.Body.setStatic(this.body,false)
-Matter.Body.setVelocity(this.body, {x:50, y:-50})
+var novoAngulo = canhao.angle - 28
+novoAngulo = novoAngulo *(3.14/180)
+var velocidade = p5.Vector.fromAngle(novoAngulo)
+velocidade.mult(0.5)
 
+Matter.Body.setStatic(this.body,false)
+Matter.Body.setVelocity(this.body, {x:velocidade.x*(180/3.14), y:velocidade.y*(180/3.14)})
+console.log("atirar")
 }
 
 

@@ -9,6 +9,7 @@ var torre, torreImg;
 var fundoImg, solo;
 var canhao, canhaoImg,canhaoImg2
 var bala
+var angle 
 
 //pré-carregamento das imagens
 function preload(){
@@ -23,6 +24,8 @@ canhaoImg2 = loadImage("imagens/cannon.png")
 function setup() {
   //tela do jogo
   createCanvas(1200,600);
+  angleMode(DEGREES)
+  angle = 15
 
   //mecanismo de física e mundo
   engine = Engine.create();
@@ -39,7 +42,7 @@ function setup() {
   torre = Bodies.rectangle(160,350,160,310,options);
   World.add(world,torre);
 //canhao
-canhao = new Canhao(160,120,200,200,0)
+canhao = new Canhao(160,120,200,200,angle)
 //bala do canhao
 bala = new BCanhao(canhao.x, canhao.y)
 
