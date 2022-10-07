@@ -10,6 +10,7 @@ var fundoImg, solo;
 var canhao, canhaoImg,canhaoImg2
 var bala
 var angle 
+var balas = []
 
 //pré-carregamento das imagens
 function preload(){
@@ -50,10 +51,13 @@ bala = new BCanhao(canhao.x, canhao.y)
 
 function draw() 
 {
+  //att do mecanismo de fisica
+  Engine.update(engine)
   //fundo
   //background("lightgray");
   image(fundoImg,0,0,1200,600);
   
+
   //mostrando a torre
   push();
   imageMode(CENTER);
@@ -65,14 +69,33 @@ function draw()
   rect(solo.position.x, solo.position.y,width,1);
   //mostrar canhao
 canhao.display()
-//mostrar bala do canhao
-bala.display() 
+
+for(var i = 0;i<balas.length;i++){
+mostrarBalas(balas[i],i)
+
+}
+
+}
+function mostrarBalas(bala,i){
+if (bala){
+  //mostrar bala
+  bala.display() 
+
+
+}
 
 }
 function keyReleased(){
 if (keyCode == UP_ARROW){
-bala.atirar()
+balas[balas.length-1].atirar()
 
+}
+
+}
+function keyPressed(){
+if(keyCode == UP_ARROW){
+  bala = new BCanhao(canhao.x, canhao.y)
+  balas.push(bala)
 }
 
 }

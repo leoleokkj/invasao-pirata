@@ -1,8 +1,7 @@
 class BCanhao{
     //propriedades do objeto
     constructor(x,y){
-        this.x = x;
-        this.y = y;
+        
         this.r = 30
         var options = {
             isStatic: true
@@ -18,9 +17,9 @@ class BCanhao{
     //mostrar o canhão na tela
     display(){
     push()
-    translate(this.x, this.y)
+   
     imageMode(CENTER)
-    image(this.preload,0,0,this.r,this.r)
+    image(this.preload,this.body.position.x,this.body.position.y,this.r,this.r)
     pop()
     }
 atirar(){
