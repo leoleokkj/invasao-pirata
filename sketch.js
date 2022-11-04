@@ -8,10 +8,20 @@ var engine, world, backgroundImg,boat;
 var canvas, angle, tower, ground, cannon;
 var balls = [];
 var boats = [];
+var boatSpritedata, boatSpritesheet;
+var boatAnimation = [];
+var DboatSpritedata, DboatSpritesheet;
+var DboatAnimation = [];
+
+
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
   towerImage = loadImage("./assets/tower.png");
+  boatSpritedata = loadJSON("./assets/boat/boat.json");
+  boatSpritesheet = loadImage("./assets/boat/boat.png");
+  DboatSpritedata = loadJSON("./assets/boat/brokenBoat.json");
+  DboatSpritesheet = loadImage("./assets/boat/brokenBoat.png");
 }
 
 function setup() {
@@ -28,7 +38,20 @@ function setup() {
   World.add(world, tower);
 
   cannon = new Cannon(180, 110, 130, 100, angle);
- 
+
+  //matriz de animação
+  var boatFrames = boatSpritedata.frames;
+  for(var i=0; i<boatFrames.length; i++){
+    var pos = boatFrames[i].position;
+    var img = boatSpritesheet.get(pos.x, pos.y, pos.w, pos.h);
+    boatAnimation.push(img);
+  }
+  var DboatFrames = DboatSpritedata.frames;
+  for(var i=0; i<DboatFrames.length; i++){
+    var pos = DboatFrames[i].position;
+    var img = DboatSpritesheet.get(pos.x, pos.y, pos.w, pos.h);
+    DboatAnimation.push(img);
+  }
 }
 
 function draw() {
@@ -85,7 +108,7 @@ function showBoats() {
     ) {
       var positions = [-40, -60, -70, -20];
       var position = random(positions);
-      var boat = new Boat(width, height - 100, 170, 170, position);
+      var boat = new Boat(width, height - 100, 170, 170, position,boatAnimation);
 
       boats.push(boat);
     }
@@ -98,10 +121,11 @@ function showBoats() {
         });
 
         boats[i].display();
+        boats[i].animacao();
       } 
     }
   } else {
-    var boat = new Boat(width, height - 60, 170, 170, -60);
+    var boat = new Boat(width, height - 60, 170, 170, -60, boatAnimation);
     boats.push(boat);
   }
 }
